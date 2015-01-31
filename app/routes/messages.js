@@ -14,6 +14,7 @@ messages.create = function(req, res) {
   var message = new Message;
 
   message.set(res.body);
+  messsag.set({ user: req.user });
 
   message.save(function(err) {
     if (err) {
