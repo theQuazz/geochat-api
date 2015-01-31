@@ -17,12 +17,13 @@ app.set('json spaces', 2);
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(passport.initialize());
 
-app.post('/users', users.create);
+app.post('/users', auth.facebook, users.create);
 
-app.get('/messages/mock', messages.mock);
-app.get('/messages',      messages.list);
-app.post('/messages',     messages.create);
+app.get('/messages/mock', /* auth.required , */ messages.mock);
+app.get('/messages',      /* auth.required , */ messages.list);
+app.post('/messages',     /* auth.required , */ messages.create);
 
 mongoose.connect(MONGO_URI);
 mongoose.set('debug', true);
