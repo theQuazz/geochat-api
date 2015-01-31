@@ -24,3 +24,4 @@ app.listen(PORT, function() {
 });
 
 mongoose.connect(MONGO_URI);
+mongoose.set('debug', true);

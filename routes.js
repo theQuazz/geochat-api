@@ -31,8 +31,15 @@ routes.messages.list = function(req, res) {
 
   var query = Message
         .find()
-        .where('loc')
-        .near({center: point, spherical: true, maxDistance: 1})
+        .where('loc', {
+          $nearSphere: {
+            $geometry: {
+              type: 'Point',
+              coordinates: point
+            },
+            $maxDistance: 30
+          }
+        })
         .where('sendAt')
         .gt(since);
 
