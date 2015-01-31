@@ -1,0 +1,27 @@
+{
+  "name": "fuck-meu-api",
+  "version": "1.0.0",
+  "description": "Hahahahahahahahah",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theQuazz/fuck-meu-api.git"
+  },
+  "author": "theQuazz",
+  "license": "apache 2.0",
+  "bugs": {
+    "url": "https://github.com/theQuazz/fuck-meu-api/issues"
+  },
+  "homepage": "https://github.com/theQuazz/fuck-meu-api",
+  "dependencies": {
+    "async": "^0.9.0",
+    "bcrypt": "^0.8.1",
+    "body-parser": "^1.10.2",
+    "express": "^4.11.1",
+    "lodash": "^3.0.1",
+    "mongoose": "^3.8.22"
+  }
+}
