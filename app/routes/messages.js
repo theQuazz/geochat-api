@@ -29,7 +29,7 @@ messages.create = function(req, res) {
 
 messages.list = function(req, res) {
   var point = [ req.query.lat, req.query.lng ];
-  var since = req.query.since;
+  var since = req.query.since || new Date();
 
   var query = Message
         .find()
