@@ -1,19 +1,11 @@
-
+var _    = require('lodash');
 var User = require('../models/user');
 
 var users = {};
 
 users.create = function(req, res) {
-  var user = new User;
-
-  user.set(res.body);
-
-  user.save(function(err) {
-	if (err) {
-	    return res.status(400).json({error: err.message});
-	}
-	 res.json(user);
-  });
+  console.log(req.user);
+  res.status(req.user ? 200 : 401).json(_.omit(req.user.toObject(), 'fbToken', '__v'));
 }
 
 

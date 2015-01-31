@@ -1,5 +1,5 @@
 {
-  "name": "fuck-meu-api",
+  "name": "geochat-api",
   "version": "1.0.0",
   "description": "Hahahahahahahahah",
   "main": "server.js",
@@ -23,10 +23,12 @@
     "bcrypt": "^0.8.1",
     "body-parser": "^1.10.2",
     "express": "^4.11.1",
+    "fbgraph": "^0.3.0",
     "lodash": "^3.0.1",
     "mongoose": "^3.8.22",
     "morgan": "^1.5.1",
     "passport": "^0.2.1",
+    "passport-facebook-token": "^0.4.0",
     "passport-http-bearer": "^1.0.1"
   }
 }

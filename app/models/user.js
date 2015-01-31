@@ -6,6 +6,8 @@ var ObjectId = Schema.Types.ObjectId;
 
 var User = new Schema({
   facebookId: { type: String, required: true },
+  fbToken: { type: String },
+  name: { type: String },
   token: { type: String, required: true }
 });
 

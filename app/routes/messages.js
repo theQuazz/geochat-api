@@ -16,6 +16,7 @@ messages.create = function(req, res) {
   var message = new Message;
 
   message.set(res.body);
+  messsag.set({ user: req.user });
 
   message.save(function(err) {
     if (err) {
@@ -42,7 +43,8 @@ messages.list = function(req, res) {
           }
         })
         .where('sendAt')
-        .gt(since);
+        .gt(since)
+        .populate('user', ['name', 'facebookId']);
 
   query.exec(function(err, messages) {
     if (err) {
