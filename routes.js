@@ -29,7 +29,7 @@ routes.messages.list = function(req, res) {
   var point = [ req.query.lat, req.query.lng ];
   var since = req.query.since;
 
-  var query = message
+  var query = Message
         .find()
         .where('loc')
         .near({center: point, spherical: true, maxDistance: 1})
