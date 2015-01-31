@@ -1,17 +1,16 @@
 
-var Message = require('./message');
+var Message = require('../models/message');
 
-var routes = {};
-routes.messages = {};
+var messages = {};
 
-routes.messages.mock = function(req, res) {
+messages.mock = function(req, res) {
   res.json([
     { message: 'test message 1!', sentAt: new Date(), loc: ['43.659405199999995', '-79.3973439'] },
     { message: 'test message 2!', sentAt: new Date(), loc: ['43.659405199999995', '-79.3973439'] }
   ]);
 };
 
-routes.messages.create = function(req, res) {
+messages.create = function(req, res) {
   var message = new Message;
 
   message.set(res.body);
@@ -25,7 +24,7 @@ routes.messages.create = function(req, res) {
   });
 };
 
-routes.messages.list = function(req, res) {
+messages.list = function(req, res) {
   var point = [ req.query.lat, req.query.lng ];
   var since = req.query.since;
 
@@ -37,7 +36,7 @@ routes.messages.list = function(req, res) {
               type: 'Point',
               coordinates: point
             },
-            $maxDistance: 30
+            $maxDistance: 50
           }
         })
         .where('sendAt')
@@ -52,4 +51,4 @@ routes.messages.list = function(req, res) {
   });
 };
 
-module.exports = routes;
+module.exports = messages;
