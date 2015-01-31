@@ -4,9 +4,17 @@ var User = require('../models/user');
 var users = {};
 
 users.create = function(req, res) {
-  
-  
-  res.json({});
-};
+  var user = new User;
+
+  user.set(res.body);
+
+  user.save(function(err) {
+	if (err) {
+	    return res.status(400).json({error: err.message});
+	}
+	 res.json(user);
+  });
+}
+
 
 module.exports = users;
