@@ -4,6 +4,7 @@
   "description": "Hahahahahahahahah",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +23,7 @@
     "body-parser": "^1.10.2",
     "express": "^4.11.1",
     "lodash": "^3.0.1",
-    "mongoose": "^3.8.22"
+    "mongoose": "^3.8.22",
+    "morgan": "^1.5.1"
   }
 }

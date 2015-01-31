@@ -1,6 +1,7 @@
 var express    = require('express');
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
+var logger     = require('morgan');
 
 var Schema = mongoose.Schema;
 
@@ -18,6 +19,7 @@ var Message = mongoose.model('Message', messageSchema);
 
 var app = express();
 
+app.use(logger('dev'));
 app.use(bodyParser.json());
 
 app.get('/messages', function(req, res) {
