@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 var crypto   = require('crypto');
 
-var schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
-var User = new schema({
+var User = new Schema({
   facebookId: { type: String, required: true },
   token: { type: String, required: true }
 });

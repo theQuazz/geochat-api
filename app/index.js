@@ -4,19 +4,21 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
 var logger     = require('morgan');
-var passport   = require('
+var passport   = require('passport');
 
 var messages = require('./routes/messages');
 var users    = require('./routes/users');
 
 var app = express();
 
+require('./auth');
+
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(express.session({ secret: 'keyboard cat' }));
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(express.session({ secret: 'keyboard cat' }));
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 app.get('/messages/mock', messages.mock);
 app.get('/messages',      messages.list);
