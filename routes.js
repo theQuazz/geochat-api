@@ -1,7 +1,7 @@
 
 var Message = require('./message');
-
-var routes = {};
+// var account = require('./accounts'); 
+ear routes = {};
 routes.messages = {};
 
 routes.messages.mock = function(req, res) {

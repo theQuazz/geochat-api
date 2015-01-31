@@ -9,7 +9,10 @@ var Message = new Schema({
   sentAt:   { type: Date, default: Date.now, required: true },
   sendAt:   { type: Date, default: Date.now, required: true },
   duration: { type: Number, default: Infinity, required: true },
-  // user:     { type: ObjectId, required: true },
+  // username:{ type: String, required: true },
+  // messageId { type: ObjectId, required: true},
+  // recurrance: { type: Number, default: 1},
+  // receiver: { type: String },
 });
 
 module.exports = mongoose.model('Message', Message);
