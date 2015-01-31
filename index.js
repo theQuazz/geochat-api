@@ -30,6 +30,13 @@ app.get('/messages', function(req, res) {
   });
 });
 
+app.get('/messages/mock', function(req, res) {
+  res.json([
+    { message: 'test message 1!', sentAt: new Date(), loc: ['43.659405199999995', '-79.3973439'] },
+    { message: 'test message 2!', sentAt: new Date(), loc: ['43.659405199999995', '-79.3973439'] }
+  ]);
+});
+
 app.post('/messages', function(req, res) {
   var message = new Message;
 
