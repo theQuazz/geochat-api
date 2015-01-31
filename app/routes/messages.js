@@ -41,7 +41,8 @@ messages.list = function(req, res) {
           }
         })
         .where('sendAt')
-        .gt(since);
+        .gt(since)
+        .populate('user', ['name', 'facebookId']);
 
   query.exec(function(err, messages) {
     if (err) {

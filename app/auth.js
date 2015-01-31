@@ -19,7 +19,11 @@ passport.use(new FacebookTokenStrategy({
     enableProof: true
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOneAndUpdate({ facebookId: profile.id }, {}, { upsert: true }, function (err, user) {
+    var find = { facebookId: profile.id };
+    var opts = { upsert: true };
+    var set  = { name: profile.displayName };
+
+    User.findOneAndUpdate(find, set, opts, function (err, user) {
       if (err) return done(err);
 
       graph.extendAccessToken({
