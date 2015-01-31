@@ -3,6 +3,8 @@ var Message = require('../models/message');
 
 var messages = {};
 
+var facebook = require('./facebook.js');
+
 messages.mock = function(req, res) {
   res.json([
     { message: 'test message 1!', sentAt: new Date(), loc: ['43.659405199999995', '-79.3973439'] },
@@ -46,9 +48,23 @@ messages.list = function(req, res) {
     if (err) {
       return res.status(500).json({error: err.message});
     }
-
-    res.json(messages);
+  
+    facebook.getFbData(req.query.accessToken,'me/friends',function(data){
+      res.json({friendList: data, messages: messages});
+    });
   });
 };
+
+/*
+
+{
+	messages: [
+		{ messages: ..., loc: ..., ...}
+	],
+	fiendList: [
+		{ name: ..., asldkfj: ...}
+	]
+}
+*/
 
 module.exports = messages;
