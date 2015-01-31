@@ -12,6 +12,8 @@ var messageSchema = new Schema({
   duration: {type: Number, default: Infinity, required: true}
 });
 
+mongoose.connect('mongodb://localhost:27017/geochat');
+
 var Message = mongoose.model('Message', messageSchema);
 
 var app = express();
