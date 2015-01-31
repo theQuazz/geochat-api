@@ -1,7 +1,7 @@
 
 var Message = require('./message');
-// var account = require('./accounts'); 
-ear routes = {};
+
+var routes = {};
 routes.messages = {};
 
 routes.messages.mock = function(req, res) {
@@ -26,7 +26,17 @@ routes.messages.create = function(req, res) {
 };
 
 routes.messages.list = function(req, res) {
-  message.find(function(err, messages) {
+  var point = [ req.query.lat, req.query.lng ];
+  var since = req.query.since;
+
+  var query = message
+        .find()
+        .where('loc')
+        .near({center: point, spherical: true, maxDistance: 1})
+        .where('sendAt')
+        .gt(since);
+
+  query.exec(function(err, messages) {
     if (err) {
       return res.status(500).json({error: err.message});
     }
