@@ -48,7 +48,7 @@ messages.list = function(req, res) {
             type: 'Point',
             coordinates: [ req.query.lat, req.query.lng ]
           },
-          $maxDistance: 50
+          $maxDistance: 150
         }
       });
 
