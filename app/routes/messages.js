@@ -11,10 +11,10 @@ messages.mock = function(req, res) {
 };
 
 messages.create = function(req, res) {
-  var message = new Message;
+  var message = new Message();
 
-  message.set(res.body);
-  messsag.set({ user: req.user });
+  message.set(req.body);
+  message.set({ user: req.user });
 
   message.save(function(err) {
     if (err) {
