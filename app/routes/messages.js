@@ -52,7 +52,17 @@ messages.list = function(req, res) {
         }
       });
 
-    respond();
+    if (req.user) {
+      Read.distinct('message', { user: req.user }, function(err, users) {
+        if (err) return fn(err);
+
+        query = query.where('user').nin(users);
+
+        respond();
+      });
+    } else {
+      respond();
+    }
   } else if (req.user) {
     Read.distinct('message', { user: req.user }, function(err, users) {
       if (err) return fn(err);
