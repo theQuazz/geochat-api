@@ -53,10 +53,10 @@ messages.list = function(req, res) {
       });
 
     if (req.user) {
-      Read.distinct('message', { user: req.user }, function(err, users) {
+      Read.distinct('message', { user: req.user }, function(err, messages) {
         if (err) return fn(err);
 
-        query = query.where('user').nin(users);
+        query = query.where('message').nin(messages);
 
         respond();
       });
@@ -64,10 +64,10 @@ messages.list = function(req, res) {
       respond();
     }
   } else if (req.user) {
-    Read.distinct('message', { user: req.user }, function(err, users) {
+    Read.distinct('message', { user: req.user }, function(err, messages) {
       if (err) return fn(err);
 
-      query = query.where('user').in(users);
+      query = query.where('message').in(messages);
 
       respond();
     });
