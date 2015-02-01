@@ -1,14 +1,8 @@
 
 var Message = require('../models/message');
+var Read    = require('../models/read');
 
 var messages = {};
-
-messages.mock = function(req, res) {
-  res.json([
-    { message: 'test message 1!', sentAt: new Date(), loc: ['43.659405199999995', '-79.3973439'] },
-    { message: 'test message 2!', sentAt: new Date(), loc: ['43.659405199999995', '-79.3973439'] }
-  ]);
-};
 
 messages.create = function(req, res) {
   var message = new Message();
@@ -26,43 +20,50 @@ messages.create = function(req, res) {
 };
 
 messages.list = function(req, res) {
-  var point = [ req.query.lat, req.query.lng ];
-  var since = req.query.since || new Date();
+  var since = req.query.since || 0;
 
   var query = Message
-        .find()
-        .where('loc', {
-          $nearSphere: {
-            $geometry: {
-              type: 'Point',
-              coordinates: point
-            },
-            $maxDistance: 50
-          }
-        })
-        .where('sendAt')
-        .gt(since)
-        .populate('user', 'name facebookId');
+    .find()
+    .where('sendAt')
+    .gt(since)
+    .populate('user', 'name facebookId');
 
-  query.exec(function(err, messages) {
-    if (err) {
-      return res.status(500).json({error: err.message});
-    }
+  var respond = function() {
+    query.exec(function(err, messages) {
+      if (err) {
+        return res.status(500).json({error: err.message});
+      }
 
-    res.json(messages);
-  });
+      Read.mark(req.user, messages, function(err) {
+        res.json(messages);
+      });
+    });
+  };
+
+  if (req.query.lat && req.query.lng) {
+    query = query
+      .where('loc', {
+        $nearSphere: {
+          $geometry: {
+            type: 'Point',
+            coordinates: [ req.query.lat, req.query.lng ]
+          },
+          $maxDistance: 50
+        }
+      });
+
+    respond();
+  } else if (req.user) {
+    Read.distinct('message', { user: req.user }, function(err, users) {
+      if (err) return fn(err);
+
+      query = query.where('user').in(users);
+
+      respond();
+    });
+  } else {
+    respond();
+  }
 };
-
-/*
-
-{
-	messages: [
-		{ messages: ..., loc: ..., ...}
-	],
-	fiendList: [
-		{ name: ..., asldkfj: ...}
-	]
-}
-*/
 
 module.exports = messages;

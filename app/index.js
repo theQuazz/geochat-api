@@ -21,7 +21,6 @@ app.use(passport.initialize());
 
 app.post('/users', auth.facebook, users.create);
 
-app.get('/messages/mock', /* auth.required , */ messages.mock);
 app.get('/messages',      /* auth.required , */ messages.list);
 app.post('/messages',     /* auth.required , */ messages.create);
 
